@@ -26,6 +26,10 @@ let package = Package(
               .product(name: "ConfettiSwiftUI", package: "ConfettiSwiftUI")
             ]
         ),
+        .binaryTarget(
+          name: "ContextualSDK",
+          path: "Pods/Contextual/ContextualSDK.xcframework"
+        )
     ]
 )
 
