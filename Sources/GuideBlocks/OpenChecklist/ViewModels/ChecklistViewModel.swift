@@ -65,7 +65,14 @@ class OpenChecklistViewModel : ObservableObject {
         }
     }
     
-    func tappedATask() {
+    func performAction(_ taskIndex: Int) {
+        taskModels[taskIndex].performAction()
+        switch taskModels[taskIndex].actionType {
+        case .gotoScreen, .setTag:
+            isPopupVisible = false
+        case .checkTag:
+            isPopupVisible = true
+        }
         guideController?.nextStepOfGuide()
     }
     
