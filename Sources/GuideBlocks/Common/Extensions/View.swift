@@ -13,6 +13,10 @@ extension View {
     func contextualContainerFormat(_ containerElement: SHTipElement?) -> some View {
         modifier(
             ContextualContainerModifier(
+                width: containerElement?.width,
+                widthUnit: containerElement?.widthUnit,
+                height: containerElement?.height,
+                heightUnit: containerElement?.heightUnit,
                 padding: containerElement?.padding,
                 backgroundColor: containerElement?.backgroundColor
             )

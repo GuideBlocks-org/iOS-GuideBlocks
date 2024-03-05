@@ -12,10 +12,7 @@ import SwiftUI
 let circleVideoViewModel = CircleVideoViewModel()
 
 class CircleVideoViewModel : ObservableObject {
-    var circleVideoGuide: CircleVideoGuide?
+    var guideController: CircleVideoGuideController?
     var videoIsDismissed = false
-    
-    init() {
-    }
 
 }

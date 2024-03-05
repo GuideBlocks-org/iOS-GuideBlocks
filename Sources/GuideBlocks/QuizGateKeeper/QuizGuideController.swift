@@ -1,8 +1,8 @@
 //
-//  OpenChecklistGuide.swift
+//  QuizGuideController.swift
 //  GuideBlocks
 //
-//  Created by Amr Aboelela on 2024/2/8.
+//  Created by Amr Aboelela on 2024/2/26.
 //  Copyright © 2024 Contextual.
 //
 
@@ -10,12 +10,12 @@ import SwiftUI
 import ContextualSDK
 
 /// A guide controller for displaying a checklist view.
-public class OpenChecklistGuide: CTXBaseGuideController {
+public class QuizGuideController: CTXBaseGuideController {
     public var completedCallback: (() -> ())?
     public var closeButtonTapped: (() -> ())?
     
     var contextualContainer: ContextualContainer?
-    private var hostingController: UIHostingController<OpenChecklistView>?
+    private var hostingController: UIHostingController<QuizSheetView>?
     
     /// Presents the guide block.
     ///
@@ -36,10 +36,10 @@ public class OpenChecklistGuide: CTXBaseGuideController {
             return
         }
         self.contextualContainer = contextualContainer
-        openChecklistViewModel.openChecklistGuide = self
-        openChecklistViewModel.updateData()
-        let view = OpenChecklistView(
-            viewModel: openChecklistViewModel,
+        quizViewModel.guideController = self
+        quizViewModel.updateData()
+        let view = QuizSheetView(
+            viewModel: quizViewModel,
             closeButtonTapped: {
                 self.dismissGuide()
                 self.closeButtonTapped?()

@@ -1,5 +1,5 @@
 //
-//  QRCodeGuide.swift
+//  QRCodeGuideController.swift
 //  GuideBlocks
 //
 //  Created by Amr Aboelela on 2024/2/19.
@@ -10,8 +10,7 @@ import SwiftUI
 import ContextualSDK
 
 /// A guide controller for displaying a checklist view.
-public class QRCodeGuide: CTXBaseGuideController {
-    //public var scanButtonTapped: (() -> ())?
+public class QRCodeGuideController: CTXBaseGuideController {
     public var scannedCodeCallback: ((String) -> ())?
     public var closeButtonTapped: (() -> ())?
 
@@ -38,7 +37,7 @@ public class QRCodeGuide: CTXBaseGuideController {
             return
         }
         self.contextualContainer = contextualContainer
-        qrViewModel.qrCodeGuide = self
+        qrViewModel.guideController = self
         qrViewModel.updateData()
         qrViewModel.scanButtonTapped = {
             self.nextStepOfGuide()

@@ -1,5 +1,5 @@
 //
-//  OpenChecklistViewModel.swift
+//  ChecklistViewModel.swift
 //  GuideBlocks
 //
 //  Created by Amr Aboelela on 2024/2/9.
@@ -12,13 +12,12 @@ import SwiftUI
 let openChecklistViewModel = OpenChecklistViewModel()
 
 class OpenChecklistViewModel : ObservableObject {
-    var openChecklistGuide: OpenChecklistGuide?
+    var guideController: ChecklistGuideController?
     var contextualContainer: ContextualContainer? {
-        openChecklistGuide?.contextualContainer
+        guideController?.contextualContainer
     }
     
     @Published var isPopupVisible = false
-    //@Published var title = "Do List"
     @Published var taskListVisible = true
     @Published var taskModels = [TaskModel]() {
         didSet {
@@ -67,7 +66,7 @@ class OpenChecklistViewModel : ObservableObject {
     }
     
     func tappedATask() {
-        openChecklistGuide?.nextStepOfGuide()
+        guideController?.nextStepOfGuide()
     }
     
     func dismissIfNeeded() {
@@ -78,9 +77,9 @@ class OpenChecklistViewModel : ObservableObject {
             }
         }
         taskListVisible = !needToDismiss
-        if let openChecklistGuide, needToDismiss {
-            openChecklistGuide.dismissGuide()
-            openChecklistGuide.completedCallback?()
+        if let guideController, needToDismiss {
+            guideController.dismissGuide()
+            guideController.completedCallback?()
         }
     }
     

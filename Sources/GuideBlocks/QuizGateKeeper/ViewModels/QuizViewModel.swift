@@ -12,9 +12,9 @@ import SwiftUI
 let quizViewModel = QuizViewModel()
 
 class QuizViewModel : ObservableObject {
-    var quizGuide: QuizGuide?
+    var guideController: QuizGuideController?
     var contextualContainer: ContextualContainer? {
-        quizGuide?.contextualContainer
+        guideController?.contextualContainer
     }
     
     @Published var quizIsVisible = false
@@ -112,6 +112,7 @@ class QuizViewModel : ObservableObject {
             print("QuizViewModel, performAction, goHome")
             quizIsVisible = false
             quizModel?.numberOfAttempts = 0
+            guideController?.nextStepOfGuide()
         }
         showResults = false
         currentQuestionIndex = 0

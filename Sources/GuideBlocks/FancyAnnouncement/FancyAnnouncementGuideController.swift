@@ -1,51 +1,59 @@
 //
-//  QuizGuide.swift
+//  FancyAnnouncementGuideController.swift
 //  GuideBlocks
 //
-//  Created by Amr Aboelela on 2024/2/26.
-//  Copyright © 2024 Contextual.
+//  Created by Marc Stroebel on 2023/11/7.
+//  Copyright © 2023 Contextual.
 //
 
 import SwiftUI
 import ContextualSDK
 
-/// A guide controller for displaying a checklist view.
-public class QuizGuide: CTXBaseGuideController {
-    public var completedCallback: (() -> ())?
+public class FancyAnnouncementGuideController: CTXBaseGuideController {
     public var closeButtonTapped: (() -> ())?
+    public var leftButtonTapped: (() -> ())?
+    public var rightButtonTapped: (() -> ())?
     
-    var contextualContainer: ContextualContainer?
-    private var hostingController: UIHostingController<QuizSheetView>?
+    private var hostingController: UIHostingController<FancyAnnouncementView>?
     
-    /// Presents the guide block.
-    ///
-    /// - Parameters:
-    ///   - contextualContainer: The contextual container.
-    ///   - controller: The view controller to present the guide block on.
-    ///   - success: The closure to be called when the guide block is successfully presented.
-    ///   - failure: The closure to be called when there is a failure in presenting the guide block.
     public override func presentGuideBlock(
         contextualContainer: ContextualContainer,
         viewController controller: UIViewController?,
         success: @escaping ((CTXIGuidePayload) -> ()),
         failure: @escaping ((CTXIGuidePayload) -> ())
     ) {
-
+        let guide = contextualContainer.guidePayload.guide
+        
         guard let controller = controller else {
             failure(contextualContainer.guidePayload)
             return
         }
-        self.contextualContainer = contextualContainer
-        quizViewModel.quizGuide = self
-        quizViewModel.updateData()
-        let view = QuizSheetView(
-            viewModel: quizViewModel,
+        
+        let dismissGuide = {
+            self.dismissGuide()
+        }
+        
+        let view = FancyAnnouncementView(
+            titleElement: guide.title,
+            messageElement: guide.content,
+            leftButtonElement: guide.prev,
+            rightButtonElement: guide.next,
+            boxElement: guide.content,
+            imageUrl: guide.arrayImages?.first?.resource,
             closeButtonTapped: {
-                self.dismissGuide()
+                dismissGuide()
                 self.closeButtonTapped?()
+            },
+            leftButtonTapped: {
+                self.previousStepOfGuide()
+                self.leftButtonTapped?()
+            },
+            rightButtonTapped: {
+                self.nextStepOfGuide()
+                self.rightButtonTapped?()
             }
         )
-        //view.buttonTextElement = guide.title
+        
         self.hostingController = UIHostingController(rootView: view)
         
         guard let hostingController = self.hostingController else {
@@ -55,8 +63,9 @@ public class QuizGuide: CTXBaseGuideController {
         
         controller.addChild(hostingController)
         controller.view.addSubview(hostingController.view)
-        self.hostingController?.view.backgroundColor = .clear
+        
         hostingController.view.translatesAutoresizingMaskIntoConstraints = false
+        hostingController.view.backgroundColor = .clear
         
         NSLayoutConstraint.activate([
             hostingController.view.centerXAnchor.constraint(equalTo: controller.view.centerXAnchor),
@@ -68,7 +77,6 @@ public class QuizGuide: CTXBaseGuideController {
         success(contextualContainer.guidePayload)
     }
     
-    /// Called when the app or framework dismisses the guide block, do cleanup to remove it.
     override public func isDismissingGuide() {
         self.hostingController?.willMove(toParent: nil)
         self.hostingController?.view.removeFromSuperview()

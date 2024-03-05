@@ -12,18 +12,15 @@ import SwiftUI
 let qrViewModel = QRViewModel()
 
 class QRViewModel : ObservableObject {
-    var qrCodeGuide: QRCodeGuide?
+    var guideController: QRCodeGuideController?
     var contextualContainer: ContextualContainer? {
-        qrCodeGuide?.contextualContainer
+        guideController?.contextualContainer
     }
     var scanButtonTapped: (() -> ())?
     var scannedCodeCallback: ((String) -> ())?
     
     @Published var isPopupVisible: Bool = false
     @Published var qrCodeVisible = true
-    
-    init() {
-    }
     
     func updateData() {
     }

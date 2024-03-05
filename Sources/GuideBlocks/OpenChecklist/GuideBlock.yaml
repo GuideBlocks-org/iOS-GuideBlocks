@@ -39,7 +39,7 @@ Extensibility: {
                 "key": "favourited_properties_count",
                 "value": "3",
                 "type": "int",
-                "operator": "gte" # greater than or equals
+                "operator": "gte"
             }
         }
     ]

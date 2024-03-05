@@ -21,12 +21,6 @@ class QRViewModelTests: XCTestCase {
         super.tearDown()
     }
     
-    func testUpdateData() {
-        qrViewModel.updateData()
-        
-        XCTAssertEqual(qrViewModel.title, "QR Code Scanner")
-    }
-    
     func testScannedCallback() {
         // Given
         let viewModel = QRViewModel()

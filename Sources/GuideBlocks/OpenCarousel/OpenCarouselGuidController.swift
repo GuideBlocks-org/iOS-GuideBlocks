@@ -1,5 +1,5 @@
 //
-//  OpenCarouselGuid.swift
+//  OpenCarouselGuidController.swift
 //  GuideBlocks
 //
 //  Created by Aamir on 2024/2/10.
@@ -10,7 +10,7 @@ import ContextualSDK
 import SwiftUI
 
 /// A guide controller for displaying a circle video view.
-public class OpenCarouselGuid: CTXBaseGuideController {
+public class OpenCarouselGuidController: CTXBaseGuideController {
     
     private var hostingController: UIHostingController<OpenCarouselGuidView>?
     fileprivate var animation: SHTipAnimationElement!
@@ -70,7 +70,7 @@ public class OpenCarouselGuid: CTXBaseGuideController {
     }
 }
 
-extension OpenCarouselGuid: UIViewControllerTransitioningDelegate {
+extension OpenCarouselGuidController: UIViewControllerTransitioningDelegate {
     public func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return CustomTransitionAnimator(isPresenting: true,animationModel: AnimationModel(inAnimation: animation))
     }
