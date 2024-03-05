@@ -35,7 +35,7 @@ public class MultiSelectSurveyGuideController: CTXBaseGuideController {
             question: question,
             cancelTapped: {
                 self.hostingController?.dismiss(animated: true)
-                self.dismissGuide()
+                self.previousStepOfGuide()
             },
             doneTapped: {
                 let choices = question.choices.filter({ $0.selected }).map { $0.text }
