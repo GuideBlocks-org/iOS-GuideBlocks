@@ -15,4 +15,8 @@ class CircleVideoViewModel : ObservableObject {
     var guideController: CircleVideoGuideController?
     var videoIsDismissed = false
 
+    func dismiss() {
+        videoIsDismissed = true
+        guideController?.previousStepOfGuide()
+    }
 }

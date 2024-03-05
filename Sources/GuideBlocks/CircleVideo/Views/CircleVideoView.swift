@@ -17,8 +17,22 @@ struct CircleVideoView: View {
     var closeButtonTapped: () -> ()
     var videoIsPlaying: () -> ()
     
+    var circlePadding: CGFloat {
+        return 40.0 * (1.0 - circleDiameter / 300.0)
+    }
+    
+    func dismiss() {
+        closeButtonTapped()
+        circleVideoViewModel.dismiss()
+    }
+    
     var body: some View {
         ZStack {
+            BackDismissView(
+                viewTapped: {
+                    dismiss()
+                }
+            )
             VideoWebView(
                 url: URL(string: videoUrl),
                 videoIsPlaying: {
@@ -26,14 +40,17 @@ struct CircleVideoView: View {
                 }
             )
             .cornerRadius(circleDiameter/2)
-            .frame(width:circleDiameter, height: circleDiameter)
-            .padding(25)
+            .frame(
+                width: circleDiameter,
+                height: circleDiameter
+            )
+            .padding(circlePadding)
+            //.background(Color.yellow)
             .overlay(
                 CloseButton(
                     imageElement: imageElement,
                     closeButtonTapped: {
-                        closeButtonTapped()
-                        circleVideoViewModel.videoIsDismissed = true
+                        dismiss()
                     }
                 ),
                 alignment: .topTrailing
@@ -47,7 +64,7 @@ struct CircleVideoView_Previews: PreviewProvider {
     static var previews: some View {
         CircleVideoView(
             videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ?si=Wx9SC9sBIU6AlMnz",
-            circleDiameter: 150,
+            circleDiameter: 300,
             closeButtonTapped: {
             },
             videoIsPlaying: {

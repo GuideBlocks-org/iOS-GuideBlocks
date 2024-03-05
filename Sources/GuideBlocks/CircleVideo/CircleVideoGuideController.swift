@@ -46,7 +46,7 @@ public class CircleVideoGuideController: CTXBaseGuideController {
         let defaultVideoURL = "https://www.youtube.com/embed/Y9ChGCY8Azk?si=aLGas88lnxI6g_jJ?autoplay=1"
         let videoUrl = (guide.extraJson?["vid_url"] as? String) ?? defaultVideoURL
         let circleDiameter = (guide.extraJson?["circle_diameter"] as? CGFloat) ?? 200
-        
+        circleVideoViewModel.guideController = self
         let view = CircleVideoView(
             imageElement: guide.arrayImages.first,
             videoUrl: videoUrl,

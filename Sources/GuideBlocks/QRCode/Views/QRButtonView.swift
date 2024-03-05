@@ -23,18 +23,13 @@ struct QRButtonView: View {
     
     var body: some View {
         ZStack {
-            if viewModel.qrCodeVisible {
-                // background view to detect taps outside the button
-                Color.white
-                    .onTapGesture {
-                        viewModel.qrCodeVisible = false
+            if viewModel.guideIsVisible {
+                BackDismissView(
+                    viewTapped: {
+                        closeButtonTapped()
+                        viewModel.guideIsVisible = false
                     }
-                    .frame(
-                        width: UIScreen.main.bounds.width,
-                        height: UIScreen.main.bounds.height
-                    )
-                    .edgesIgnoringSafeArea(.all)
-                    .opacity(0.1)
+                )
                 Button(
                     action: {
                         viewModel.isPopupVisible.toggle()
@@ -57,7 +52,7 @@ struct QRButtonView: View {
                         imageElement: container?.arrayImages.first,
                         closeButtonTapped: {
                             closeButtonTapped()
-                            viewModel.qrCodeVisible = false
+                            viewModel.guideIsVisible = false
                         }
                     ),
                     alignment: .topTrailing

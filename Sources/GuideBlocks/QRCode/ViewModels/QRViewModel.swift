@@ -20,7 +20,7 @@ class QRViewModel : ObservableObject {
     var scannedCodeCallback: ((String) -> ())?
     
     @Published var isPopupVisible: Bool = false
-    @Published var qrCodeVisible = true
+    @Published var guideIsVisible = true
     
     func updateData() {
     }
