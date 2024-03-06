@@ -10,6 +10,8 @@ import SwiftUI
 import ContextualSDK
 
 public class FancyAnnouncementGuideController: CTXBaseGuideController {
+    var contextualContainer: ContextualContainer?
+    
     public var closeButtonTapped: (() -> ())?
     public var leftButtonTapped: (() -> ())?
     public var rightButtonTapped: (() -> ())?
@@ -29,7 +31,7 @@ public class FancyAnnouncementGuideController: CTXBaseGuideController {
             failure(contextualContainer.guidePayload)
             return
         }
-        
+        self.contextualContainer = contextualContainer
         let dismissGuide = {
             self.dismissGuide()
         }

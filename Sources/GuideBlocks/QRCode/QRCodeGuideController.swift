@@ -11,10 +11,10 @@ import ContextualSDK
 
 /// A guide controller for displaying a checklist view.
 public class QRCodeGuideController: CTXBaseGuideController {
+    var contextualContainer: ContextualContainer?
+    
     public var scannedCodeCallback: ((String) -> ())?
     public var closeButtonTapped: (() -> ())?
-
-    var contextualContainer: ContextualContainer?
     
     private var hostingController: UIHostingController<QRButtonView>?
     
