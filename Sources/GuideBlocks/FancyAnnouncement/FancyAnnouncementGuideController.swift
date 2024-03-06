@@ -14,6 +14,7 @@ public class FancyAnnouncementGuideController: CTXBaseGuideController {
     public var leftButtonTapped: (() -> ())?
     public var rightButtonTapped: (() -> ())?
     
+    var contextualContainer: ContextualContainer?
     private var hostingController: UIHostingController<FancyAnnouncementView>?
     
     public override func presentGuideBlock(
@@ -32,6 +33,7 @@ public class FancyAnnouncementGuideController: CTXBaseGuideController {
         let dismissGuide = {
             self.dismissGuide()
         }
+        self.contextualContainer = contextualContainer
         fancyAnnouncementViewModel.guideController = self
         let view = FancyAnnouncementView(
             viewModel: fancyAnnouncementViewModel,
