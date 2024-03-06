@@ -32,13 +32,9 @@ public class FancyAnnouncementGuideController: CTXBaseGuideController {
         let dismissGuide = {
             self.dismissGuide()
         }
-        
+        fancyAnnouncementViewModel.guideController = self
         let view = FancyAnnouncementView(
-            titleElement: guide.title,
-            messageElement: guide.content,
-            leftButtonElement: guide.prev,
-            rightButtonElement: guide.next,
-            boxElement: guide.content,
+            viewModel: fancyAnnouncementViewModel,
             imageUrl: guide.arrayImages?.first?.resource,
             closeButtonTapped: {
                 dismissGuide()

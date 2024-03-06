@@ -10,6 +10,9 @@ import ContextualSDK
 import SwiftUI
 
 struct CloseButton: View {
+    var padding = 10.0
+    var foregroundColor = Color.white
+    var backgroundColor = Color.red
     var imageElement: SHTipImageElement?
     var closeButtonTapped: () -> ()
     
@@ -22,10 +25,10 @@ struct CloseButton: View {
                 Image(systemName: "xmark.circle.fill")
                     .resizable()
                     .contextualImageResize(imageElement)
-                    .padding(10)
+                    .padding(padding)
                     .contextualImageBackground(imageElement)
-                    .background(.red)
-                    .foregroundColor(.white)
+                    .foregroundColor(foregroundColor)
+                    .background(backgroundColor)
                     .clipShape(Circle())
                     .shadow(radius: 8)
                     .zIndex(11)
@@ -37,6 +40,9 @@ struct CloseButton: View {
 struct CloseButton_Previews: PreviewProvider {
     static var previews: some View {
         CloseButton(
+            padding: 5,
+            foregroundColor: .green,
+            backgroundColor: .white,
             closeButtonTapped: {
             }
         )

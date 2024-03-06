@@ -29,7 +29,7 @@ struct ContextualImageResizeModifier: ViewModifier {
                 .frame(width: width, height: height)
         } else {
             content
-                .frame(width: 35, height: 35)
+                .frame(width: 40, height: 40)
         }
     }
 }
