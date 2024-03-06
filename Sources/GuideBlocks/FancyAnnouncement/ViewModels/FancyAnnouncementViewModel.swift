@@ -12,7 +12,7 @@ import SwiftUI
 let fancyAnnouncementViewModel = FancyAnnouncementViewModel()
 
 class FancyAnnouncementViewModel : ObservableObject {
-    var guideController: QRCodeGuideController?
+    var guideController: FancyAnnouncementGuideController?
     var contextualContainer: ContextualContainer? {
         guideController?.contextualContainer
     }
