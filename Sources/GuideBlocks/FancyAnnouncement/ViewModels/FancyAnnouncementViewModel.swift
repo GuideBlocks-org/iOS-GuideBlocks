@@ -11,11 +11,12 @@ import SwiftUI
 
 let fancyAnnouncementViewModel = FancyAnnouncementViewModel()
 
-class FancyAnnouncementViewModel : ObservableObject {
+class FancyAnnouncementViewModel: GuideViewModelProtocol {
     var guideController: FancyAnnouncementGuideController?
     var contextualContainer: ContextualContainer? {
         guideController?.contextualContainer
     }
+    var guideIsVisible = true
     
     func updateData() {
     }
