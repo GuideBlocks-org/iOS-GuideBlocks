@@ -21,13 +21,17 @@ struct QRButtonView: View {
         container?.title.text ?? "QR Code Scanner"
     }
     
+    func dismiss(outside: Bool) {
+        closeButtonTapped()
+        viewModel.dismiss(outside: outside)
+    }
+    
     var body: some View {
         ZStack {
             if viewModel.guideIsVisible {
                 BackDismissView(
                     viewTapped: {
-                        closeButtonTapped()
-                        viewModel.guideIsVisible = false
+                        dismiss(outside: true)
                     }
                 )
                 Button(
@@ -51,8 +55,7 @@ struct QRButtonView: View {
                     CloseButton(
                         imageElement: container?.arrayImages.first,
                         closeButtonTapped: {
-                            closeButtonTapped()
-                            viewModel.guideIsVisible = false
+                            dismiss(outside: false)
                         }
                     ),
                     alignment: .topTrailing

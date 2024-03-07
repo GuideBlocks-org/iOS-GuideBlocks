@@ -25,4 +25,12 @@ class QRViewModel : ObservableObject {
     func updateData() {
     }
 
+    func dismiss(outside: Bool) {
+        guideIsVisible = false
+        if outside {
+            guideController?.tapOutsideOfGuide()
+        } else {
+            guideController?.previousStepOfGuide()
+        }
+    }
 }

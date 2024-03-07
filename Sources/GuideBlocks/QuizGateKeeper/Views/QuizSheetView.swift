@@ -14,7 +14,7 @@ struct QuizSheetView: View {
     @State var sheetIsVisible = true
     
     var body: some View {
-        if viewModel.quizIsVisible {
+        if viewModel.guideIsVisible {
             Text("")
                 .sheet(isPresented: $sheetIsVisible) {
                     if #available(iOS 16.0, *) {

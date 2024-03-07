@@ -21,9 +21,19 @@ struct OpenChecklistView: View {
         container?.title.text ?? "Do List"
     }
     
+    func dismiss(outside: Bool) {
+        closeButtonTapped()
+        viewModel.dismiss(outside: outside)
+    }
+    
     var body: some View {
-        VStack {
-            if viewModel.taskListVisible {
+        ZStack {
+            if viewModel.guideIsVisible {
+                BackDismissView(
+                    viewTapped: {
+                        dismiss(outside: true)
+                    }
+                )
                 Button(
                     action: {
                         viewModel.isPopupVisible.toggle()
@@ -45,8 +55,7 @@ struct OpenChecklistView: View {
                     CloseButton(
                         imageElement: container?.arrayImages.first,
                         closeButtonTapped: {
-                            closeButtonTapped()
-                            viewModel.taskListVisible = false
+                            dismiss(outside: false)
                         }
                     ),
                     alignment: .topTrailing
