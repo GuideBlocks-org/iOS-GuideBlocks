@@ -27,8 +27,8 @@ struct QRButtonView: View {
     }
     
     var body: some View {
-        ZStack {
-            if viewModel.guideIsVisible {
+        if viewModel.guideIsVisible {
+            ZStack {
                 BackDismissView(
                     viewTapped: {
                         dismiss(outside: true)

@@ -11,16 +11,8 @@ import SwiftUI
 
 let circleVideoViewModel = CircleVideoViewModel()
 
-class CircleVideoViewModel : ObservableObject {
+class CircleVideoViewModel: GuideViewModelProtocol {
     var guideController: CircleVideoGuideController?
-    var videoIsDismissed = false
-
-    func dismiss(outside: Bool) {
-        videoIsDismissed = true
-        if outside {
-            guideController?.tapOutsideOfGuide()
-        } else {
-            guideController?.previousStepOfGuide()
-        }                                          
-    }
+    
+    var guideIsVisible = true
 }

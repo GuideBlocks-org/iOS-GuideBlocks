@@ -11,7 +11,7 @@ import SwiftUI
 
 let quizViewModel = QuizViewModel()
 
-class QuizViewModel : ObservableObject {
+class QuizViewModel: GuideViewModelProtocol {
     var guideController: QuizGuideController?
     var contextualContainer: ContextualContainer? {
         guideController?.contextualContainer

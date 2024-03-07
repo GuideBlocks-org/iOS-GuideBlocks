@@ -18,6 +18,5 @@ struct MarginModifier: ViewModifier {
             .padding(.bottom, margin?.bottom ?? 0)
             .padding(.leading, margin?.left ?? 0)
             .padding(.trailing, margin?.right ?? 0)
-
     }
 }

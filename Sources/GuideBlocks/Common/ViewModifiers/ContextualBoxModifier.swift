@@ -11,10 +11,6 @@ import SwiftUI
 
 struct ContextualBoxModifier: ViewModifier {
     let padding: FourSide?
-    /*let borderWidth: CGFloat?
-    let borderShadow: CGFloat?
-    let cornerRadius: CGFloat?
-    */
     
     func body(content: Content) -> some View {
         if let padding {

@@ -11,7 +11,7 @@ import SwiftUI
 
 let openChecklistViewModel = OpenChecklistViewModel()
 
-class OpenChecklistViewModel : ObservableObject {
+class OpenChecklistViewModel: GuideViewModelProtocol {
     var guideController: ChecklistGuideController?
     var contextualContainer: ContextualContainer? {
         guideController?.contextualContainer
@@ -89,14 +89,4 @@ class OpenChecklistViewModel : ObservableObject {
             guideController.completedCallback?()
         }
     }
-    
-    func dismiss(outside: Bool) {
-        guideIsVisible = false
-        if outside {
-            guideController?.tapOutsideOfGuide()
-        } else {
-            guideController?.previousStepOfGuide()
-        }
-    }
-    
 }

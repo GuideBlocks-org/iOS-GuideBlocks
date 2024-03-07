@@ -172,7 +172,7 @@ class QuizViewModelTests: XCTestCase {
         viewModel.quizModel?.correctCount = 1
         viewModel.performAction()
         
-        XCTAssertEqual(viewModel.quizIsVisible, false)
+        XCTAssertEqual(viewModel.guideIsVisible, false)
         XCTAssertEqual(viewModel.showResults, false)
         XCTAssertEqual(viewModel.currentQuestionIndex, 0)
         
@@ -181,7 +181,7 @@ class QuizViewModelTests: XCTestCase {
         viewModel.performAction()
         XCTAssertEqual(viewModel.quizModel?.correctCount, 0)
         
-        XCTAssertEqual(viewModel.quizIsVisible, false)
+        XCTAssertEqual(viewModel.guideIsVisible, false)
         XCTAssertEqual(viewModel.showResults, false)
         XCTAssertEqual(viewModel.currentQuestionIndex, 0)
     }

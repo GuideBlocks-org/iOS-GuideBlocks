@@ -11,7 +11,7 @@ import SwiftUI
 
 let qrViewModel = QRViewModel()
 
-class QRViewModel : ObservableObject {
+class QRViewModel: GuideViewModelProtocol {
     var guideController: QRCodeGuideController?
     var contextualContainer: ContextualContainer? {
         guideController?.contextualContainer
@@ -23,14 +23,5 @@ class QRViewModel : ObservableObject {
     @Published var guideIsVisible = true
     
     func updateData() {
-    }
-
-    func dismiss(outside: Bool) {
-        guideIsVisible = false
-        if outside {
-            guideController?.tapOutsideOfGuide()
-        } else {
-            guideController?.previousStepOfGuide()
-        }
     }
 }

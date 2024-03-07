@@ -20,7 +20,7 @@ struct VideoWebView: UIViewRepresentable {
     }
 
     func makeUIView(context: Context) -> WKWebView {
-        circleVideoViewModel.videoIsDismissed = false
+        circleVideoViewModel.guideIsVisible = true
         return webView
     }
     
@@ -95,7 +95,7 @@ struct VideoWebView: UIViewRepresentable {
             elapsedTime += 1
             
             // Stop timer if elapsed time reaches total time
-            if elapsedTime >= totalTime || circleVideoViewModel.videoIsDismissed {
+            if elapsedTime >= totalTime || !circleVideoViewModel.guideIsVisible {
                 stopObservingVideoPlayback()
             }
         }

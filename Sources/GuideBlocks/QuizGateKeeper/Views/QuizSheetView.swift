@@ -13,17 +13,28 @@ struct QuizSheetView: View {
     var closeButtonTapped: () -> ()
     @State var sheetIsVisible = true
     
+    func dismiss(outside: Bool) {
+        closeButtonTapped()
+        viewModel.dismiss(outside: outside)
+    }
+    
     var body: some View {
         if viewModel.guideIsVisible {
             Text("")
-                .sheet(isPresented: $sheetIsVisible) {
-                    if #available(iOS 16.0, *) {
-                        QuizView(viewModel: viewModel)
-                            .presentationDetents([.medium, .large])
-                    } else {
-                        QuizView(viewModel: viewModel)
+                .sheet(
+                    isPresented: $sheetIsVisible,
+                    onDismiss: {
+                        dismiss(outside: true)
+                    },
+                    content: {
+                        if #available(iOS 16.0, *) {
+                            QuizView(viewModel: viewModel)
+                                .presentationDetents([.medium, .large])
+                        } else {
+                            QuizView(viewModel: viewModel)
+                        }
                     }
-                }
+                )
         }
     }
 }
