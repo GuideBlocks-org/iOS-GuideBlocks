@@ -16,7 +16,6 @@ public class FancyAnnouncementGuideController: CTXBaseGuideController {
     public var leftButtonTapped: (() -> ())?
     public var rightButtonTapped: (() -> ())?
     
-    var contextualContainer: ContextualContainer?
     private var hostingController: UIHostingController<FancyAnnouncementView>?
     
     public override func presentGuideBlock(
