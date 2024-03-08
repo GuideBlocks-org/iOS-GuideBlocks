@@ -141,11 +141,11 @@ class QuizViewModelTests: XCTestCase {
             return
         }
         
-        var result = viewModel.performActionType
+        var result = viewModel.quizFinalAction
         XCTAssertEqual(result, .restartQuiz)
         viewModel.quizModel?.numberOfAttempts = 2
-        result = viewModel.performActionType
-        XCTAssertEqual(result, .goHome)
+        result = viewModel.quizFinalAction
+        XCTAssertEqual(result, .restartQuiz)
     }
     
     func testUpdateResultsData() {
@@ -159,7 +159,7 @@ class QuizViewModelTests: XCTestCase {
         XCTAssertEqual(viewModel.actionButtonLabel, "Restart Quiz")
         viewModel.quizModel?.numberOfAttempts = 2
         viewModel.updateResultsData()
-        XCTAssertEqual(viewModel.actionButtonLabel, "OK")
+        XCTAssertEqual(viewModel.actionButtonLabel, "Restart Quiz")
     }
     
     func testPerformAction() {

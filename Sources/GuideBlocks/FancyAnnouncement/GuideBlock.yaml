@@ -1,0 +1,12 @@
+Title: Circle Video
+Author: David Jones
+Contact: support@contextu.al
+TestApp: https://github.com/contextu-al/AirBnB-iOS
+TestAppBranch: circle-video
+Description: Show a very nice small popup video designed for a persons head explaining an App Feature
+Acknowledgements:
+Screenshot: 
+Video: 
+Extensibility: {
+    "guideBlockKey": "FancyAnnouncement"
+}

@@ -51,11 +51,11 @@ class QuizModelTests: XCTestCase {
         XCTAssertEqual(quizActionModel.actionType, .restartQuiz)
     }
     
-    func testPerformAction() {
+    func testUpdateResultsData() {
         var quizModel = QuizModel.sampleQuiz
         quizModel.correctCount = 1
         XCTAssertEqual(quizModel.numberOfAttempts, 0)
-        quizModel.performAction()
+        quizModel.updateResultsData()
         let quizAction = quizModel.quizActionModel
         XCTAssertEqual(quizModel.correctCount, 1)
         XCTAssertEqual(quizAction.action, "restartQuiz")

@@ -9,6 +9,12 @@
 import ContextualSDK
 import SwiftUI
 
+public enum QuizFinalAction {
+    case restartQuiz
+    case blockAndWait
+    case goHome
+}
+
 let quizViewModel = QuizViewModel()
 
 class QuizViewModel: GuideViewModelProtocol {
@@ -74,19 +80,35 @@ class QuizViewModel: GuideViewModelProtocol {
             currentQuestionIndex += 1
         } else {
             quizModel?.numberOfAttempts += 1
+            quizModel?.updateResultsData()
             showResults = true
         }
     }
     
-    var performActionType: QuizActionType {
+    var quizFinalAction: QuizFinalAction {
         guard let quizModel else {
             print("performActionType, quizModel is nil")
             return .goHome
         }
-        var result = quizModel.quizActionModel.actionType
-        if let attempts = quizModel.quizActionModel.actionData.attempts {
+        var result: QuizFinalAction
+        switch quizModel.quizActionModel.actionType {
+        case .restartQuiz:
+            result = .restartQuiz
+        case .goHome:
+            result = .goHome
+        }
+        let actionData = quizModel.quizActionModel.actionData
+        if let attempts = actionData.attempts {
             if quizModel.numberOfAttempts >= attempts {
-                result = .goHome
+                if quizModel.waitSecondsRemaining > 0 {
+                    if actionData.allowScreenAccess {
+                        result = .goHome
+                    } else {
+                        result = .blockAndWait
+                    }
+                } else {
+                    result = .restartQuiz
+                }
             }
         }
         return result
@@ -94,28 +116,39 @@ class QuizViewModel: GuideViewModelProtocol {
         
     func updateResultsData() {
         var result = "OK"
-        switch performActionType {
+        switch quizFinalAction {
         case .restartQuiz:
             result = "Restart Quiz"
+        case .blockAndWait:
+            if let quizModel {
+                result = "Wait for \(quizModel.waitMinutesRemaining) minutes"
+            }
         case .goHome:
             break
         }
         actionButtonLabel = result
     }
     
-    func performAction() {
-        quizModel?.performAction()
-        switch performActionType {
-        case .restartQuiz:
-            print("QuizViewModel, performAction, restartQuiz")
-        case .goHome:
-            print("QuizViewModel, performAction, goHome")
-            guideIsVisible = false
-            quizModel?.numberOfAttempts = 0
-            guideController?.nextStepOfGuide()
-        }
+    func restartQuiz() {
         showResults = false
         currentQuestionIndex = 0
         quizModel?.correctCount = 0
+    }
+    
+    func performAction() {
+        switch quizFinalAction {
+        case .restartQuiz:
+            print("QuizViewModel, quizFinalAction, restartQuiz")
+            restartQuiz()
+        case .blockAndWait:
+            print("QuizViewModel, quizFinalAction, blockAndWait")
+            showResults = true
+        case .goHome:
+            print("QuizViewModel, quizFinalAction, goHome")
+            guideIsVisible = false
+            quizModel?.numberOfAttempts = 0
+            guideController?.nextStepOfGuide()
+            restartQuiz()
+        }
     }
 }
