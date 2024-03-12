@@ -86,28 +86,27 @@ class QuizViewModel: GuideViewModelProtocol {
     }
     
     var quizFinalAction: QuizFinalAction {
-        guard let quizModel else {
-            print("performActionType, quizModel is nil")
-            return .goHome
-        }
-        var result: QuizFinalAction
-        switch quizModel.quizActionModel.actionType {
-        case .restartQuiz:
-            result = .restartQuiz
-        case .goHome:
-            result = .goHome
-        }
-        let actionData = quizModel.quizActionModel.actionData
-        if let attempts = actionData.attempts {
-            if quizModel.numberOfAttempts >= attempts {
-                if quizModel.waitSecondsRemaining > 0 {
-                    if actionData.allowScreenAccess {
-                        result = .goHome
+        var result = QuizFinalAction.restartQuiz
+        if let theQuizModel = quizModel {
+            switch theQuizModel.quizActionModel.actionType {
+            case .restartQuiz:
+                result = .restartQuiz
+            case .goHome:
+                result = .goHome
+            }
+            let actionData = theQuizModel.quizActionModel.actionData
+            if let attempts = actionData.attempts {
+                if theQuizModel.numberOfAttempts >= attempts {
+                    if theQuizModel.waitSecondsRemaining > 0 {
+                        if actionData.allowScreenAccess {
+                            result = .goHome
+                        } else {
+                            result = .blockAndWait
+                        }
                     } else {
-                        result = .blockAndWait
+                        quizModel?.numberOfAttempts = 0
+                        result = .restartQuiz
                     }
-                } else {
-                    result = .restartQuiz
                 }
             }
         }
@@ -121,7 +120,13 @@ class QuizViewModel: GuideViewModelProtocol {
             result = "Restart Quiz"
         case .blockAndWait:
             if let quizModel {
-                result = "Wait for \(quizModel.waitMinutesRemaining) minutes"
+                let minutesRemaining = quizModel.waitMinutesRemaining
+                result = "Wait for \(minutesRemaining) minutes"
+                if minutesRemaining > 0 {
+                    Timer.scheduledTimer(withTimeInterval: 60, repeats: false) { [weak self] _ in
+                        self?.updateResultsData()
+                    }
+                }
             }
         case .goHome:
             break
