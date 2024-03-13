@@ -37,6 +37,7 @@ public class QRCodeGuideController: CTXBaseGuideController {
             return
         }
         self.contextualContainer = contextualContainer
+        qrViewModel.guideIsVisible = true
         qrViewModel.guideController = self
         qrViewModel.updateData()
         qrViewModel.scanButtonTapped = {
