@@ -23,9 +23,9 @@
         "package": "Contextual",
         "repositoryURL": "https://github.com/contextu-al/Contextual-SDK",
         "state": {
-          "branch": null,
-          "revision": "e387ca9c689943b624a59e966b2474ce749a11f5",
-          "version": "3.0.1"
+          "branch": "develop",
+          "revision": "3ed51c868b6ce407c230f5033f16dd8b2176011f",
+          "version": null
         }
       }
     ]

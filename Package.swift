@@ -16,11 +16,11 @@ let package = Package(
         ),
     ],
     dependencies: [
-        .package(
-            name: "Contextual",
-            url: "https://github.com/contextu-al/Contextual-SDK",
-            .upToNextMajor(from: "3.0.1")
-        ),
+         .package(
+             name: "Contextual",
+             url: "https://github.com/contextu-al/Contextual-SDK",
+             .branch("develop")
+         ),
         .package(
             name: "ConfettiSwiftUI",
             url: "https://github.com/simibac/ConfettiSwiftUI",
