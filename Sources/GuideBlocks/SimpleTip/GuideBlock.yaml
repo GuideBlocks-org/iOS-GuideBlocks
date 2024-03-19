@@ -1,0 +1,12 @@
+Title: Simple Tip
+Author: Marc Stroebel
+Contact: support@contextu.al
+TestApp: https://github.com/contextu-al/AirBnB-iOS
+TestAppBranch: simple-tip
+Description: Show a simple tip designed to point to an element on the app
+Acknowledgements:
+Screenshot: 
+Video: 
+Extensibility: {
+    "guideBlockKey": "SimpleTip"
+}
