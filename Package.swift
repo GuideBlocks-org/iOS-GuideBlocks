@@ -19,7 +19,7 @@ let package = Package(
         .package(
             name: "Contextual",
             url: "https://github.com/contextu-al/Contextual-SDK",
-            .upToNextMajor(from: "3.0.1")
+            .upToNextMajor(from: "3.0.3")
         ),
         .package(
             name: "ConfettiSwiftUI",
